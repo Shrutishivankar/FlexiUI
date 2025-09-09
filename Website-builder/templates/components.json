@@ -1,0 +1,62 @@
+{
+  "navbar": {
+    "backgroundColor": "#ffffff",
+    "textColor": "#000000",
+    "links": ["Home", "About", "Services"],
+    "alignment": "left"
+  },
+  "header": {
+    "title": "Header Title",
+    "subtitle": "Subtitle or tagline",
+    "titleColor": "#007bff",
+    "subtitleColor": "#6c757d"
+  },
+  "buttons": [
+    {
+      "text": "Primary Button",
+      "backgroundColor": "#0d6efd",
+      "textColor": "#ffffff"
+    },
+    {
+      "text": "Secondary Button",
+      "backgroundColor": "#6c757d",
+      "textColor": "#ffffff"
+    }
+  ],
+  "card": {
+    "title": "Card Title",
+    "text": "Some quick example text to build on the card title.",
+    "imageUrl": "https://via.placeholder.com/150",
+    "buttonText": "Go somewhere",
+    "buttonColor": "#0d6efd"
+  },
+  "carousel": {
+    "images": [
+      "https://via.placeholder.com/400x200",
+      "https://via.placeholder.com/400x200"
+    ]
+  },
+  "form": {
+    "emailPlaceholder": "Enter your email",
+    "passwordPlaceholder": "Enter your password",
+    "submitButtonColor": "#28a745",
+    "backgroundColor": "#f9e2e2"
+  },
+  "contacts": {
+    "email": "contact@flexiui.com",
+    "phone": "+123456789",
+    "backgroundColor": "#f9e2e2"
+  },
+  "grid": {
+    "items": [
+      { "text": "Grid Item 1", "backgroundColor": "#6c757d", "textColor": "#ffffff" },
+      { "text": "Grid Item 2", "backgroundColor": "#343a40", "textColor": "#ffffff" },
+      { "text": "Grid Item 3", "backgroundColor": "#6c757d", "textColor": "#ffffff" }
+    ]
+  },
+  "footer": {
+    "text": "&copy; 2025 FlexiUI. All Rights Reserved.",
+    "backgroundColor": "#343a40",
+    "textColor": "#ffffff"
+  }
+}

@@ -1,0 +1,280 @@
+:root {
+    --primary: #E32636;
+    --primary-foreground: #FFFFFF;
+    --secondary: #FF4D4D;
+    --secondary-foreground: #FFFFFF;
+    --accent: #FFFAFA;
+    --accent-foreground: #333333;
+    --background: #FFFAFA;
+    --foreground: #333333;
+    --card: #FFFFFF;
+    --card-foreground: #333333;
+    --border: #E5E5E5;
+    --font-family: 'Nunito', sans-serif; /* Body text */}
+
+body {
+    font-family: var(--font-family);
+    color: var(--foreground);
+    background-color: var(--background);
+}    
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif; /* Headings */
+    font-weight: 700; /* Bold headings */
+}
+
+.custom-nav {
+    background: rgba(255, 250, 250, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    padding: 1.2rem 0;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    color: var(--primary);
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+    transform: translateY(-2px);
+}
+
+.hover-effect {
+    position: relative;
+    color: var(--foreground);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+}
+
+.hover-effect::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--primary);
+    transition: all 0.3s ease;
+}
+
+.hover-effect:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.hero {
+    padding: 140px 0 100px;
+    background: linear-gradient(135deg, var(--accent), #FFF);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(227, 38, 54, 0.1) 0%, rgba(255, 250, 250, 0) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-card {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.hero-card:hover {
+    transform: translateY(-10px);
+}
+
+.pulse-button {
+    background: var(--primary);
+    border: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.pulse-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(227, 38, 54, 0.4);
+}
+
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.02);
+}
+/* ----  */
+.features {
+    position: relative;
+    background-image: url('/static/assets/wallpaper.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white; /* Adjust text color for better visibility */
+    padding: 80px 0; /* Adjust padding as needed */
+}
+
+.features::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adds a semi-transparent dark overlay */
+    backdrop-filter: blur(14px); /* Blurs only the background */
+    -webkit-backdrop-filter: blur(14px); /* For Safari */
+    z-index: 0;
+}
+
+.features .container {
+    position: relative;
+    z-index: 1; /* Ensures content stays above the blurred background */
+}
+
+.feature-card {
+    background: var(--card);
+    color: var(--card-foreground); /* Ensures text is visible */
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.gallery {
+    padding: 100px 0;
+}
+
+.template-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.template-card img {
+    transition: transform 0.3s;
+}
+
+.template-card:hover img {
+    transform: scale(1.05);
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 1rem;
+    transform: translateY(100%);
+    transition: transform 0.3s;
+}
+
+.template-card:hover .overlay {
+    transform: translateY(0);
+}
+
+.pricing {
+    padding: 100px 0;
+    background: var(--accent);
+}
+
+.pricing-card {
+    background: var(--card);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.pricing-card.popular {
+    transform: scale(1.05);
+    border: 2px solid var(--primary);
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 1rem 0;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+
+.features-list li {
+    margin: 0.5rem 0;
+}
+
+.cta {
+    padding: 100px 0;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--primary-foreground);
+}
+
+.footer {
+    padding: 60px 0;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+}
+
+.footer h5 {
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+.footer a {
+    color: var(--foreground);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: var(--primary);
+}
+
+.newsletter-form input {
+    border: 1px solid var(--border);
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 120px 0 60px;
+    }
+    
+    .hero-card {
+        margin-bottom: 2rem;
+    }
+}

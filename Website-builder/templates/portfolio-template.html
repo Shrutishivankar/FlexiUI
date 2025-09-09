@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://appsrv1-147a1.kxcdn.com/builder/homepage/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/static/assets/streamline.png">
+    <title>Modern Portfolio | FlexiUI.com</title>
+    <meta name="description" content="Open-Source and FREE Page and Website builder - Build your projects in No-Time for free.">
+    <meta name="keywords" content="free builder, site builder, page builder, open-source page builder, free website builder, flexible user interface builder">
+    <link rel="canonical" href="https://www.flexiUI.com/portfolio-template/">
+  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+    --primary: #0070f3;
+    --primary-foreground: #ffffff;
+    --secondary: #666666;
+    --secondary-foreground: #ffffff;
+    --background: #ffffff;
+    --foreground: #000000;
+    --card: #ffffff;
+    --card-foreground: #000000;
+    --border: #e5e7eb;
+    --input: #e5e7eb;
+    --ring: #0070f3;
+    --radius: 0.5rem;
+    --font-family: 'Inter', sans-serif;
+}
+
+[data-theme="dark"] {
+    --primary: #0070f3;
+    --primary-foreground: #ffffff;
+    --secondary: #374151;
+    --secondary-foreground: #ffffff;
+    --background: #1f2937;
+    --foreground: #ffffff;
+    --card: #374151;
+    --card-foreground: #ffffff;
+    --border: #374151;
+    --input: #374151;
+    --ring: #0070f3;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--foreground);
+    background-color: var(--background);
+    transition: all 0.3s ease;
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar-brand {
+    color: var(--foreground);
+    font-weight: 600;
+}
+
+.nav-link {
+    color: var(--foreground);
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary);
+}
+
+.hero-section {
+    min-height: 100vh;
+    padding-top: 80px;
+    background: linear-gradient(135deg, var(--background), var(--card));
+}
+
+.hero-img {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.hero-img:hover {
+    transform: translateY(-10px);
+}
+
+.project-card {
+    border: 1px solid var(--border);
+    background: var(--card);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.progress {
+    height: 8px;
+    background-color: var(--input);
+    border-radius: var(--radius);
+}
+
+.progress-bar {
+    background-color: var(--primary);
+    border-radius: var(--radius);
+}
+
+.contact-card {
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    background: var(--card);
+}
+
+.form-control {
+    border: 1px solid var(--input);
+    background: var(--background);
+    color: var(--foreground);
+    border-radius: var(--radius);
+    padding: 12px;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--ring);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--primary-foreground);
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,112,243,0.4);
+}
+
+.social-links a {
+    color: var(--foreground);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary);
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        text-align: center;
+    }
+    
+    .hero-img {
+        margin-top: 2rem;
+    }
+}
+
+[data-aos] {
+    pointer-events: none;
+}
+
+[data-aos].aos-animate {
+    pointer-events: auto;
+}
+
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar">
+    <div class="container mt-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <!-- Device Buttons (Right) -->
+            <div class="device-buttons">
+                <button class="btn btn-outline-primary" onclick="setDevice('desktop')">Desktop</button>
+                <button class="btn btn-outline-secondary" onclick="setDevice('tablet')">Tablet</button>
+                <button class="btn btn-outline-success" onclick="setDevice('mobile')">Mobile</button>
+            </div>
+            <!-- Save Button (Left) -->
+            <div class="d-flex gap-3 mt-3">
+                <button class="btn btn-danger" onclick="saveTemplate('portfolio-template')">Save Portfolio Template</button>
+                <button class="btn btn-secondary" onclick="goBack()">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="device-preview mt-3">
+        <div id="preview-frame" class="border rounded p-3">
+            <nav id="navbar" class="navbar navbar-expand-lg" contenteditable="true">
+                <div class="container">
+                    <a class="navbar-brand" href="#">Portfolio</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                            <li class="nav-item"><button class="btn theme-toggle" id="theme-toggle"><i class="bi bi-moon-fill"></i></button></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <section id="home" class="hero-section" contenteditable="true">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-lg-6" data-aos="fade-right">
+                            <h1 class="display-3 fw-bold">John Doe</h1>
+                            <h2 class="h4 text-muted">Frontend Developer</h2>
+                            <p class="lead mt-4">Crafting digital experiences through clean and efficient code</p>
+                            <div class="mt-5">
+                                <a href="#projects" class="btn btn-primary me-3">View Projects</a>
+                                <a href="#contact" class="btn btn-outline-primary">Contact Me</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6" data-aos="fade-left">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="Developer Setup" class="img-fluid rounded-3 hero-img">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="py-5" contenteditable="true">
+                <div class="container">
+                    <h2 class="text-center mb-5" data-aos="fade-up">Featured Projects</h2>
+                    <div class="row g-4">
+                        <div class="col-md-4" data-aos="fade-up">
+                            <div class="card project-card h-100">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f" class="card-img-top" alt="Project 1">
+                                <div class="card-body">
+                                    <h5 class="card-title">E-Commerce Platform</h5>
+                                    <p class="card-text">A modern e-commerce solution built with React and Node.js</p>
+                                    <div class="d-flex gap-2">
+                                        <span class="badge bg-primary">React</span>
+                                        <span class="badge bg-secondary">Node.js</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="card project-card h-100">
+                                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3" class="card-img-top" alt="Project 2">
+                                <div class="card-body">
+                                    <h5 class="card-title">Portfolio Dashboard</h5>
+                                    <p class="card-text">Analytics dashboard with real-time data visualization</p>
+                                    <div class="d-flex gap-2">
+                                        <span class="badge bg-primary">Vue.js</span>
+                                        <span class="badge bg-secondary">D3.js</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="card project-card h-100">
+                                <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd" class="card-img-top" alt="Project 3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Social Media App</h5>
+                                    <p class="card-text">Mobile-first social platform with real-time messaging</p>
+                                    <div class="d-flex gap-2">
+                                        <span class="badge bg-primary">React Native</span>
+                                        <span class="badge bg-secondary">Firebase</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="skills" class="py-5 bg-light" contenteditable="true">
+                <div class="container">
+                    <h2 class="text-center mb-5" data-aos="fade-up">Technical Skills</h2>
+                    <div class="row g-4">
+                        <div class="col-md-6" data-aos="fade-right">
+                            <div class="skill-item mb-4">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>HTML/CSS</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item mb-4">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>JavaScript</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item mb-4">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>React</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" data-aos="fade-left">
+                            <div class="skill-item mb-4">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Node.js</span>
+                                    <span>75%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item mb-4">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>UI/UX Design</span>
+                                    <span>70%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item mb-4">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Python</span>
+                                    <span>65%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+            <section id="about" class="py-5" contenteditable="true">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6" data-aos="fade-right">
+                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8" alt="About Me" class="img-fluid rounded-3">
+                        </div>
+                        <div class="col-lg-6" data-aos="fade-left">
+                            <h2 class="mb-4">About Me</h2>
+                            <p class="lead">I'm a passionate frontend developer with 5 years of experience in creating responsive and user-friendly web applications.</p>
+                            <p>My journey in web development started with a curiosity for creating beautiful user interfaces. Today, I specialize in building modern web applications using the latest technologies and best practices.</p>
+                            <div class="mt-4">
+                                <a href="#" class="btn btn-primary me-3">Download CV</a>
+                                <a href="#contact" class="btn btn-outline-primary">Get in Touch</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+            <section id="contact" class="py-5 bg-light" contenteditable="true">
+                <div class="container">
+                    <h2 class="text-center mb-5" data-aos="fade-up">Get in Touch</h2>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="card contact-card" data-aos="fade-up">
+                                <div class="card-body p-5">
+                                    <form>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" placeholder="Your Name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="email" class="form-control" placeholder="Your Email">
+                                        </div>
+                                        <div class="mb-3">
+                                            <textarea class="form-control" rows="5" placeholder="Your Message"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+            <footer class="py-4 text-center" contenteditable="true">
+                <div class="container">
+                    <div class="social-links mb-4">
+                        <a href="#" class="mx-2"><i class="bi bi-github"></i></a>
+                        <a href="#" class="mx-2"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="mx-2"><i class="bi bi-twitter"></i></a>
+                    </div>
+                    <p class="mb-0">© 2025 FlexiUI- Portfolio. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script>
+          // Device Preview Functionality
+          function setDevice(device) {
+            const previewFrame = document.getElementById("preview-frame");
+            const navbarLinks = document.querySelectorAll(".navbar-nav .nav-link");
+
+            if (device === "desktop") {
+                previewFrame.style.width = "100%";  // Full width for desktop
+                previewFrame.style.height = "600px"; // Set a height
+                navbarLinks.forEach(link => {
+                    link.style.padding = "0.5rem 1rem"; // Default padding
+                });
+            } else if (device === "tablet") {
+                previewFrame.style.width = "768px"; // Tablet width
+                previewFrame.style.height = "600px";
+                navbarLinks.forEach(link => {
+                    link.style.padding = "0.4rem 0.8rem"; // Adjust padding for tablet
+                });
+            } else if (device === "mobile") {
+                previewFrame.style.width = "475px"; // Mobile width
+                previewFrame.style.height = "667px";
+                navbarLinks.forEach(link => {
+                    link.style.padding = "0.3rem 0.6rem"; // Smaller padding for mobile
+                });
+            }
+
+            previewFrame.style.transition = "all 0.3s ease-in-out"; // Smooth animation
+        }
+        
+        // Function to Save the template
+        function saveTemplate() { 
+        const templateName = prompt("Enter template name:");
+            if (!templateName) {
+                alert("Template name is required!");
+                return;
+            }
+
+            const previewFrame = document.getElementById("preview-frame");
+            let templateContent = "";
+
+            try {
+                templateContent = previewFrame.contentDocument.body.innerHTML; 
+            } catch (err) {
+                console.error("Could not access iframe content:", err);
+                alert("Error accessing template content. Make sure it's from the same origin.");
+                return;
+            }
+
+            fetch('/api/save-template', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: templateName,
+                    content: templateContent
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => console.error("Error:", error));
+        }
+        // Function to Exit the Page
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

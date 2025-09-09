@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- Navbar Component with Reordering -->
+<button class="btn collapsed btn-light text-black border border-black w-100 py-3"
+type="button" data-bs-toggle="collapse" data-bs-target="#navbar-container"
+style="background-color: #f9e2e2;">
+Navbar <span class="p-1"><i class="fa-solid fa-angle-down"></i></span>   
+</button>
+
+<div id="navbar-container" class="list collapse mt-3 mb-3">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div id="navbar-items" class="d-flex">
+    <a class="navbar-brand bold draggable" href="#" draggable="true">Navbar</a>
+    <a class="navbar-brand draggable" href="#" draggable="true">Home</a>
+    <a class="navbar-brand draggable" href="#" draggable="true">About</a>
+    <a class="navbar-brand draggable" href="#" draggable="true">Services</a>
+</div>
+</nav>
+</div>
+
+<style>
+/* Dragging Feedback */
+.draggable {
+cursor: grab;
+padding: 10px;
+user-select: none;
+}
+
+.draggable:active {
+cursor: grabbing;
+opacity: 0.6;
+}
+
+.drag-over {
+border: 2px dashed #007bff;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+const navbarItems = document.getElementById("navbar-items");
+
+let draggedItem = null;
+
+function handleDragStart(e) {
+draggedItem = this;
+setTimeout(() => this.style.display = "none", 0);
+}
+
+function handleDragEnd() {
+this.style.display = "block";
+draggedItem = null;
+}
+
+function handleDragOver(e) {
+e.preventDefault();
+}
+
+function handleDragEnter() {
+this.classList.add("drag-over");
+}
+
+function handleDragLeave() {
+this.classList.remove("drag-over");
+}
+
+function handleDrop() {
+if (draggedItem !== this) {
+    let items = [...navbarItems.children];
+    let draggedIndex = items.indexOf(draggedItem);
+    let targetIndex = items.indexOf(this);
+
+    // Swap elements
+    if (draggedIndex < targetIndex) {
+        navbarItems.insertBefore(draggedItem, this.nextSibling);
+    } else {
+        navbarItems.insertBefore(draggedItem, this);
+    }
+}
+this.classList.remove("drag-over");
+}
+
+function addDragAndDropListeners(item) {
+item.addEventListener("dragstart", handleDragStart);
+item.addEventListener("dragend", handleDragEnd);
+item.addEventListener("dragover", handleDragOver);
+item.addEventListener("dragenter", handleDragEnter);
+item.addEventListener("dragleave", handleDragLeave);
+item.addEventListener("drop", handleDrop);
+}
+
+// Apply event listeners to each navbar item
+document.querySelectorAll(".draggable").forEach(addDragAndDropListeners);
+});
+</script>
+
+</body>
+</html>

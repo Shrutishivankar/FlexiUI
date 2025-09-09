@@ -1,0 +1,275 @@
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let selectedComponents = {
+            navbar: null,
+            header: null,
+            button: null,
+            card: null,
+            carousel: null,
+            form: null,
+            contact: null,
+            grid: null,
+            footer: null
+        };
+
+        // Event listener to detect selection of different components
+        document.getElementById("canvas").addEventListener("click", function (event) {
+            let closestComponent = event.target.closest(
+                ".navbar, .headerComp, .btn, .card, .carousel, form, .contactComp, .row, .footerComp"
+            );
+
+            if (closestComponent) {
+                // Reset all selected components
+                Object.keys(selectedComponents).forEach(key => selectedComponents[key] = null);
+
+                // Set the selected component based on its class
+                if (closestComponent.classList.contains("navbar")) {
+                    selectedComponents.navbar = closestComponent;
+                    loadNavbarProperties(selectedComponents.navbar);
+                } else if (closestComponent.classList.contains("headerComp")) {
+                    selectedComponents.header = closestComponent;
+                    loadHeaderProperties(selectedComponents.header);
+                } else if (closestComponent.classList.contains("btn")) {
+                    selectedComponents.button = closestComponent;
+                    loadButtonProperties(selectedComponents.button);
+                } else if (closestComponent.classList.contains("card")) {
+                    selectedComponents.card = closestComponent;
+                    loadCardProperties(selectedComponents.card);
+                } else if (closestComponent.classList.contains("carousel")) {
+                    selectedComponents.carousel = closestComponent;
+                    loadCarouselProperties(selectedComponents.carousel);
+                } else if (closestComponent.tagName === "FORM") {
+                    selectedComponents.form = closestComponent;
+                    loadFormProperties(selectedComponents.form);
+                } else if (closestComponent.classList.contains("contactComp")) {
+                    selectedComponents.contact = closestComponent;
+                    loadContactProperties(selectedComponents.contact);
+                } else if (closestComponent.classList.contains("row")) {
+                    selectedComponents.grid = closestComponent;
+                    loadGridProperties(selectedComponents.grid);
+                } else if (closestComponent.classList.contains("footerComp")) {
+                    selectedComponents.footer = closestComponent;
+                    loadFooterProperties(selectedComponents.footer);
+                }
+            }
+        });
+
+        // Function to load navbar properties into the properties panel
+        function loadNavbarProperties(navbar) {
+            let navTexts = Array.from(navbar.querySelectorAll(".navbar-brand")).map(link => link.innerText).join("\n");
+            document.getElementById("textContent").value = navTexts;
+        }
+
+        // Function to load header properties
+        function loadHeaderProperties(header) {
+            let headerTitle = header.querySelector("h1")?.innerText || "";
+            let subtitleText = header.querySelector("p")?.innerText || "";
+            document.getElementById("textContent").value = `${headerTitle}\n${subtitleText}`;
+        }
+
+        // Function to load button properties
+        function loadButtonProperties(button) {
+            document.getElementById("textContent").value = button.innerText;
+        }
+
+        // Function to load card properties
+        function loadCardProperties(card) {
+            let cardTitleText = card.querySelector(".card-title")?.innerText || "";
+            let cardTextContent = card.querySelector(".card-text")?.innerText || "";
+            document.getElementById("textContent").value = `${cardTitleText}\n${cardTextContent}`;
+        }
+
+        // Function to load carousel properties
+        function loadCarouselProperties(carousel) {
+            let slideTexts = Array.from(carousel.querySelectorAll(".carousel-item")).map((slide, index) => {
+                let imgAlt = slide.querySelector("img")?.alt || "";
+                return `Slide ${index + 1}: ${imgAlt}`;
+            }).join("\n");
+            document.getElementById("textContent").value = slideTexts;
+        }
+
+        // Function to load form properties
+        function loadFormProperties(form) {
+            let inputTexts = Array.from(form.querySelectorAll("input")).map((input, index) => {
+                let labelText = form.querySelectorAll("label")[index]?.innerText || "";
+                return `${labelText}: ${input.value}`;
+            }).join("\n");
+            document.getElementById("textContent").value = inputTexts;
+        }
+
+        // Function to load contact properties
+        function loadContactProperties(contact) {
+            let contactTexts = Array.from(contact.querySelectorAll("p")).map(detail => detail.innerText).join("\n");
+            document.getElementById("textContent").value = contactTexts;
+        }
+
+        // Function to load grid properties
+        function loadGridProperties(grid) {
+            let gridTexts = Array.from(grid.querySelectorAll(".col")).map((item, index) => `Grid Item ${index + 1}: ${item.innerText}`).join("\n");
+            document.getElementById("textContent").value = gridTexts;
+        }
+
+        // Function to load footer properties
+        function loadFooterProperties(footer) {
+            let footerText = footer.querySelector("p")?.innerText || "";
+            document.getElementById("textContent").value = footerText;
+        }
+
+        // Function to save properties
+        window.saveProperties = function () {
+            let textContentArea = document.getElementById("textContent");
+            let updatedText = textContentArea.value.split("\n");
+
+            if (selectedComponents.navbar) {
+                selectedComponents.navbar.querySelectorAll(".navbar-brand").forEach((link, index) => {
+                    if (updatedText[index]) link.innerText = updatedText[index];
+                });
+            }
+
+            if (selectedComponents.header) {
+                let headerTitle = selectedComponents.header.querySelector("h1");
+                let headerSubtitle = selectedComponents.header.querySelector("p");
+                if (headerTitle) headerTitle.innerText = updatedText[0] || "";
+                if (headerSubtitle) headerSubtitle.innerText = updatedText[1] || "";
+            }
+
+            if (selectedComponents.button) selectedComponents.button.innerText = updatedText[0] || "";
+
+            if (selectedComponents.card) {
+                let cardTitle = selectedComponents.card.querySelector(".card-title");
+                let cardText = selectedComponents.card.querySelector(".card-text");
+                if (cardTitle) cardTitle.innerText = updatedText[0] || "";
+                if (cardText) cardText.innerText = updatedText[1] || "";
+            }
+
+            if (selectedComponents.carousel) {
+                selectedComponents.carousel.querySelectorAll(".carousel-item").forEach((slide, index) => {
+                    if (updatedText[index]) {
+                        let img = slide.querySelector("img");
+                        if (img) img.alt = updatedText[index];
+                    }
+                });
+            }
+
+            if (selectedComponents.form) {
+                let inputs = selectedComponents.form.querySelectorAll("input");
+                let labels = selectedComponents.form.querySelectorAll("label");
+
+                inputs.forEach((input, index) => {
+                    if (updatedText[index]) {
+                        input.value = updatedText[index].split(":")[1]?.trim() || "";
+                    }
+                });
+
+                labels.forEach((label, index) => {
+                    if (updatedText[index]) {
+                        label.innerText = updatedText[index].split(":")[0]?.trim() || "";
+                    }
+                });
+            }
+
+            if (selectedComponents.contact) {
+                selectedComponents.contact.querySelectorAll("p").forEach((detail, index) => {
+                    detail.innerText = updatedText[index] || "";
+                });
+            }
+
+            if (selectedComponents.grid) {
+                selectedComponents.grid.querySelectorAll(".col").forEach((item, index) => {
+                    item.innerText = updatedText[index] || "";
+                });
+            }
+
+            if (selectedComponents.footer) {
+                let footerText = selectedComponents.footer.querySelector("p");
+                if (footerText) footerText.innerText = updatedText[0] || "";
+            }
+        };
+    });
+</script>
+
+<!-- JavaScript to dynamically modify properties. -->_________________________________________________________________________
+<script>
+    let selectedComponentId = null;
+    let selectedComponent = null;
+
+    async function fetchComponents() {
+        const response = await fetch('/api/components');
+        const components = await response.json();
+        let container = document.querySelector(".component.list-group");
+        container.innerHTML = "";
+
+        components.forEach(component => {
+            let div = document.createElement("div");
+            div.innerHTML = component.html_content;  // Render stored HTML
+            div.classList.add("saved-component");
+            div.dataset.id = component.id; // Store component ID
+            div.onclick = () => editComponent(component, div);
+
+            let props = component.properties;
+            div.style.backgroundColor = props.bgColor;
+            div.style.color = props.textColor;
+            div.style.fontSize = props.fontSize + "px";
+            div.style.textAlign = props.textAlign;
+
+            container.appendChild(div);
+        });
+    }
+
+    function editComponent(component, element) {
+        selectedComponentId = component.id;
+        selectedComponent = element;
+
+        // Populate the properties panel with existing values
+        document.getElementById("componentId").value = component.id;
+        document.getElementById("componentType").value = component.properties.type;
+        document.getElementById("bgColor").value = component.properties.bgColor;
+        document.getElementById("textColor").value = component.properties.textColor;
+        document.getElementById("fontSize").value = component.properties.fontSize;
+        document.getElementById("textContent").value = component.properties.text;
+        document.getElementById("imageUrl").value = component.properties.imageUrl;
+        document.getElementById("linkUrl").value = component.properties.linkUrl;
+
+        document.getElementById("right-aside").classList.add("active");
+    }
+
+    async function saveProperties() {
+        if (!selectedComponentId) return;
+
+        let updatedProperties = {
+            type: document.getElementById("componentType").value,
+            bgColor: document.getElementById("bgColor").value,
+            textColor: document.getElementById("textColor").value,
+            fontSize: document.getElementById("fontSize").value,
+            text: document.getElementById("textContent").value,
+            imageUrl: document.getElementById("imageUrl").value,
+            linkUrl: document.getElementById("linkUrl").value,
+            textAlign: document.querySelector(".btn-group .active")?.dataset.align || "left"
+        };
+
+        await fetch(`/api/components/${selectedComponentId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ properties: updatedProperties })
+        });
+
+        // Apply changes immediately
+        selectedComponent.style.backgroundColor = updatedProperties.bgColor;
+        selectedComponent.style.color = updatedProperties.textColor;
+        selectedComponent.style.fontSize = updatedProperties.fontSize + "px";
+        selectedComponent.style.textAlign = updatedProperties.textAlign;
+        selectedComponent.querySelector("a").textContent = updatedProperties.text;
+
+        document.getElementById("right-aside").classList.remove("active"); // Hide panel after saving
+    }
+
+    function resetProperties() {
+        if (!selectedComponent) return;
+        editComponent(selectedComponent.dataset.id, selectedComponent); // Reload saved properties
+    }
+
+    fetchComponents(); // Load components on page load
+</script>
+
+</body>
+</html>
