@@ -1,2 +1,2 @@
 # FlexiUI
-A No-Code Web Builder
+A No-Code UI Builder
