@@ -29,7 +29,7 @@ FlexiUI is a no-code platform that allows users to design and build responsive w
 
 1. **Clone the repo**
    ```bash
-   git clone https://github.com/yourusername/FlexiUI.git
+   git clone https://github.com/Shrutishivankar/FlexiUI.git
    cd FlexiUI
 
 2. **Create a virtual environment & install dependencies**
